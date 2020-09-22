@@ -27,6 +27,17 @@ public class GunScript : Interactable
 			SwichFiringMode();
 		}
 
+		if (Input.GetMouseButtonDown(0))
+		{
+			Action(true);
+		}
+
+		if (Input.GetMouseButtonUp(0))
+		{
+			Action(false);
+		}
+
+
 		if (ActiveHand)
 		{
 			GameManger.Instance.ShowFireMode();

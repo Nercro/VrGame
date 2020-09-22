@@ -35,11 +35,23 @@ public class Grenade : MonoBehaviour
 	{
 		Instantiate(ExplosionEffect, transform.position, transform.rotation);
 
-		Collider[] colliders = Physics.OverlapSphere(transform.position, Radius);
+		Collider[] collidersSolid = Physics.OverlapSphere(transform.position, Radius);
 
-		foreach (Collider collider in colliders)
+		foreach (Collider solidObject in collidersSolid)
 		{
-			Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
+			Target target = solidObject.GetComponent<Target>();
+
+			if (target)
+			{
+				target.DestroyTarget();
+			}
+		}
+
+		Collider[] collidersToMove = Physics.OverlapSphere(transform.position, Radius);
+
+		foreach (Collider item in collidersToMove)
+		{
+			Rigidbody rigidbody = item.GetComponent<Rigidbody>();
 
 			if (rigidbody)
 			{
